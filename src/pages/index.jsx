@@ -12,9 +12,6 @@ const poppinsFont = Poppins({
 export default function Home() {
   return (
     <>
-      <div className={`${poppinsFont.variable} foreground`}>
-        <h1 className="text-3xl font-bold underline font-poppins">Ini Index</h1>
-      </div>
     </>
   );
 }
