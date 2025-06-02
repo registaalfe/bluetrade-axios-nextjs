@@ -1,10 +1,10 @@
 import React from 'react';
-import Sidebar from '@/components/layouts/Sidebar';
+import Navbar from '@/components/layouts/Navbar';
 
 const Dashboard = () => {
     return (
         <>
-            <Sidebar />
+            <Navbar />
         </>
     );
 }
