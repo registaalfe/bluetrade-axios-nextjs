@@ -3,13 +3,23 @@
 :root {
   --background: #0a0a0a;
   --foreground: #F0F8FF;
+  --btnprofit: #21965333;
+  --downgbg: #EB575733;
+  --pendingbg: #F2994A33;
 }
 
 @theme inline {
   --color-main: #0060FF;
   --color-secondary: #D5E6FB;
+  --color-third: #626D7D;
+  --color-profit: #219653;
+  --color-down: #EB5757;
+  --color-pending: #F2994A;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-btnprofit: var(--btnprofit);
+  --color-downgbg: var(--downgbg);
+  --color-pendingbg: var(--pendingbg);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-poppins: var(--font-poppins);

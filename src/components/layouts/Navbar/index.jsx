@@ -40,10 +40,11 @@ const Navbar = () => {
         { icon: <MdLogout />, label: "Log Out" },
     ];
 
+
     return (
         <>
             {/* start: Sidebar */}
-            <nav className={`${toggleMenu ? "w-20 p-1" : "w-64 pt-[5px] pb-[5px] pl-8 pr-8"} ${poppinsFont.variable} box-border h-screen bg-white border-r-[1px] border-[#B5B5B5] sticky top-0 self-start transition-all duration-300 ease-in-out overflow-hidden text-wrap`}>
+            <nav className={`${toggleMenu ? "w-20 p-1" : "w-64 pt-[5px] pb-[5px] pl-8 pr-8"} ${poppinsFont.variable} box-border h-screen bg-white border-r-[1px] border-[#B5B5B5] sticky top-0 self-start transition-all duration-300 ease-in-out overflow-hidden text-wrap max-md:hidden`}>
                 <div className="flex items-center justify-between pt-8 pb-10 pl-2 pr-2">
                     <div className="flex gap-1.5">
                         <Image src="/img/icon.png" alt="Logo" width={62} height={20} />
@@ -100,14 +101,14 @@ const Navbar = () => {
             {/* end: Sidebar */}
 
             {/* start: Header */}
-            <header className="flex items-center justify-between border-b border-gray-200 px-10 h-20">
+            <header className={`${poppinsFont.variable} flex items-center justify-between border-b border-gray-200 px-10 h-20 max-md:px-8`}>
 
-                <form action="#" className="flex items-center flex-1 max-w-md max-md:hidden" method="GET">
+                <form action="#" className="flex items-center flex-1 max-w-md" method="GET">
                     <a onClick={() => setToggleMenu(!toggleMenu)} className="mx-2 items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 shadow-none hover:bg-accent hover:text-accent-foreground flex p-0 -ml-2 h-9 w-9 text-main hover:bg-secondary" type="button" aria-haspopup="dialog">
                         <TbMenu className="text-2xl" />
                     </a>
 
-                    <div className="flex w-full text-gray-400 rounded-full border border-gray-200 placeholder-gray-400 focus:outline-1 focus:outline-amber-400">
+                    <div className="flex w-full text-gray-400 rounded-full border border-gray-200 placeholder-gray-400 focus:outline-1 focus:outline-amber-400 max-md:hidden">
                         <label className="sr-only">
                             Search...
                         </label>
@@ -119,17 +120,17 @@ const Navbar = () => {
                 </form>
 
                 <div className="flex items-center space-x-6 pl-6">
-                    <button aria-label="Notifications" className="flex p-0 h-9 w-9 items-center justify-center rounded-md text-main hover:bg-secondary focus:outline-none" type="button">
+                    <button aria-label="Notifications" className="flex p-0 h-9 w-9 items-center justify-center rounded-md text-main hover:bg-secondary focus:outline-none max-md:hidden" type="button">
                         <GoBell className="text-xl" />
                     </button>
 
-                    <div className="flex px-4 py-2 items-center space-x-2 cursor-pointer select-none bg-foreground rounded-xl">
+                    <div className="flex px-4 py-2 items-center space-x-2 cursor-pointer select-none min-md:bg-foreground rounded-xl max-md:space-x-0 max-md:bg-none">
                         <Image src="/img/user-profile.png" alt="Logo" width={40} height={20} />
-                        <div className="flex flex-col gap-1 pr-4">
-                            <h3 className="font-semibold text-gray-900 text-sm max-md:hidden">Bravsy Mertrey</h3>
-                            <span className="font-semibold text-gray-900 text-[11px] max-md:hidden">bravsymert@mail.com</span>
+                        <div className="flex flex-col gap-1 pr-4 max-md:hidden">
+                            <h3 className="font-semibold text-black text-sm">Bravsy Mertrey</h3>
+                            <span className="font-semibold text-black text-[11px]">bravsymert@mail.com</span>
                         </div>
-                        <CiMenuKebab />
+                        <CiMenuKebab className="max-md:hidden" />
                     </div>
                 </div>
             </header>
