@@ -43,6 +43,7 @@ export default function Home() {
             </h2>
           </div>
 
+          {/* start: Estimated Balance, visibility toggle, total value, monthly profit */}
           <div className="elementor-column bg-white rounded-2xl px-5 pt-7 mb-6 h-44 space-y-4">
             <div className="elementor-element flex justify-between items-center">
               <div className="flex items-center space-x-3 text-[#5a6477] font-semibold text-base">
@@ -74,7 +75,9 @@ export default function Home() {
               </div>
             </div>
           </div>
+          {/* end: Estimated Balance, visibility toggle, total value, monthly profit */}
 
+          {/* start: Cryptocurrency Grid */}
           <div className="elementor-container grid grid-cols-2 gap-4 mb-6">
             <div className="elementor-column bg-white rounded-2xl p-4 flex flex-col">
               <div className="elementor-element flex items-center space-x-3 mb-2 text-[#5a6477] font-semibold text-sm">
@@ -128,7 +131,9 @@ export default function Home() {
               </div>
             </div>
           </div>
+          {/* end: Cryptocurrency Grid */}
 
+          {/* start: Detailed Monthly Chart */}
           <div aria-label="BTCUSDT Bitcoin Monthly Chart" className="bg-white rounded-2xl p-6">
             <div className="flex justify-between items-center mb-4">
               <div>
@@ -148,6 +153,7 @@ export default function Home() {
             </div>
             <BarChart />
           </div>
+          {/* end: Detailed Monthly Chart */}
         </div>
       </section>
     </>

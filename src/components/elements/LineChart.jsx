@@ -8,14 +8,14 @@ import Chart from "chart.js";
  * @param {string} chartId - Unique ID for each chart (e.g. "chart-BTC")
  */
 export default function LineChart({ data, chartId }) {
-    // Step 1: useRef gives us a reference to the <canvas> element
+    // useRef gives us a reference to the <canvas> element
     const chartRef = useRef(null);
 
     useEffect(() => {
-        // Step 2: Get canvas context safely using useRef
+        // Get canvas context safely using useRef
         const ctx = chartRef.current.getContext("2d");
 
-        // Step 3: Create the chart
+        // Create the chart
         const chart = new Chart(ctx, {
             type: "line",
             data: {
@@ -45,14 +45,14 @@ export default function LineChart({ data, chartId }) {
             },
         });
 
-        // Step 4: Clean up chart when component unmounts
+        // Clean up chart when component unmounts
         return () => chart.destroy();
     }, [data]);
 
     return (
         <div className="flex-auto p-3">
             <div className="relative h-16">
-                {/* Step 5: Attach useRef to canvas */}
+                {/* Attach useRef to canvas */}
                 <canvas ref={chartRef} id={chartId}></canvas>
             </div>
         </div>
