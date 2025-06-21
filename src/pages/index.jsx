@@ -2,6 +2,8 @@ import Image from 'next/image';
 import LineChart from '@/components/elements/LineChart';
 import BarChart from '@/components/elements/BarChart';
 import MarketList from '@/components/elements/MarketList'; // Import the new component
+import CurrencyConverter from '@/components/elements/CurrencyConverter'; // Import the new component
+import TransactionHistory from '@/components/elements/TransactionHistory'; // Import the new component
 import { Poppins } from 'next/font/google';
 import { IoEyeOutline } from "react-icons/io5";
 import { TiArrowSortedDown } from "react-icons/ti";
@@ -162,6 +164,18 @@ export default function Home() {
             <MarketList />
           </div>
           {/* end: Cryptocurrency Markets List */}
+
+          {/* start: Currency Converter */}
+          <div className="elementor-container mt-6">
+            <CurrencyConverter />
+          </div>
+          {/* end: Currency Converter */}
+
+          {/* start: Transaction History */}
+          <div className="elementor-container mt-6">
+            <TransactionHistory />
+          </div>
+          {/* end: Transaction History */}
         </div>
       </section>
       {/* end: Dashboard */}
