@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import LineChart from '@/components/elements/LineChart';
 import BarChart from '@/components/elements/BarChart';
+import MarketList from '@/components/elements/MarketList'; // Import the new component
 import { Poppins } from 'next/font/google';
 import { IoEyeOutline } from "react-icons/io5";
 import { TiArrowSortedDown } from "react-icons/ti";
@@ -35,6 +36,7 @@ export default function Home() {
   const sorted = chartItems.sort((a, b) => b.pnl - a.pnl);
   return (
     <>
+      {/* start: Dashboard */}
       <section className={`${poppinsFont.variable} bg-foreground elementor-section elementor-top-section relative flex px-8 py-7`}>
         <div className="elementor-container flex flex-col">
           <div className="elementor-element mb-3">
@@ -134,9 +136,9 @@ export default function Home() {
           {/* end: Cryptocurrency Grid */}
 
           {/* start: Detailed Monthly Chart */}
-          <div aria-label="BTCUSDT Bitcoin Monthly Chart" className="bg-white rounded-2xl p-6">
-            <div className="flex justify-between items-center mb-4">
-              <div>
+          <div className="elementor-container bg-white rounded-2xl p-6 mb-6">
+            <div className="elementor-column flex justify-between items-center mb-4">
+              <div className="elementor-element">
                 <p className="text-black font-semibold text-lg">
                   BTCUSDT
                 </p>
@@ -154,8 +156,15 @@ export default function Home() {
             <BarChart />
           </div>
           {/* end: Detailed Monthly Chart */}
+
+          {/* start: Cryptocurrency Markets List */}
+          <div className="elementor-container bg-white rounded-2xl">
+            <MarketList />
+          </div>
+          {/* end: Cryptocurrency Markets List */}
         </div>
       </section>
+      {/* end: Dashboard */}
     </>
   );
 }
