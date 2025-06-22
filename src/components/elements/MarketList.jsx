@@ -69,7 +69,7 @@ const CryptoRow = ({ ticker, name, price, change }) => {
             {/* Left: Ticker and Name */}
             <div className="flex flex-col">
                 <span className="text-black font-bold text-base">{ticker}</span>
-                <span className="text-gray-500 text-sm">{name}</span>
+                <span className="text-third text-sm">{name}</span>
             </div>
 
             {/* Middle: Price */}
@@ -79,7 +79,7 @@ const CryptoRow = ({ ticker, name, price, change }) => {
 
             {/* Right: Change Badge */}
             <div
-                className={`rounded-full px-3 py-1 text-xs font-semibold ${isPositive ? 'bg-emerald-100 text-emerald-700' : 'bg-red-100 text-red-700'
+                className={`rounded-full px-3 py-1 text-xs font-semibold ${isPositive ? 'bg-btnprofit text-profit' : 'bg-downgbg text-down'
                     }`}
             >
                 {isPositive ? '+' : ''}{change.toFixed(2)}%
@@ -115,8 +115,8 @@ export default function MarketList() {
                         <button
                             key={filter}
                             className={`rounded-xl px-3 py-2 text-xs font-medium ${activeFilter === filter
-                                ? 'bg-slate-800 text-white'
-                                : 'bg-slate-200 text-slate-600'
+                                ? 'bg-secondary text-main'
+                                : 'bg-[#F8F8F9] text-black'
                                 }`}
                             onClick={() => setActiveFilter(filter)}
                         >
