@@ -1,7 +1,9 @@
+"use client";
 import { useEffect, useRef } from "react";
 import Chart from "chart.js";
 
 /**
+ * 
  * LineChart Component
  * 
  * @param {Array} data - The dataset to plot (e.g. [65, 67, 66, 69])

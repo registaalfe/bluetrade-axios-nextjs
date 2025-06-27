@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from 'react';
 import { FiMoreHorizontal, FiChevronDown } from 'react-icons/fi';
 

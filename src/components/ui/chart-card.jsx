@@ -1,5 +1,5 @@
 import React from "react";
-import LineChart from "./LineChart";
+import LineChart from "./line-chart";
 
 export default function ChartCard({ title, symbol, price, pnl, chartData }) {
     return (
