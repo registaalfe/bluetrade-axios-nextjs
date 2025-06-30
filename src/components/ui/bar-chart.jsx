@@ -107,7 +107,7 @@ export default function BarChart() {
     }, [data]); // This effect depends on the 'data' state
 
     return (
-        <div className="flex-auto p-3">
+        <div className="p-3">
             <div className="relative h-[250px] w-full">
                 {/* This div is the container where the Highchart will be rendered */}
                 <div ref={chartRef} className="w-full h-full" />

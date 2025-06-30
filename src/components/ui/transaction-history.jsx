@@ -23,6 +23,11 @@ const transactionData = [
         description: 'FTMUSDT',
         amount: 1200.00,
     },
+    {
+        type: 'withdrawal',
+        description: 'DOTUSDT',
+        amount: 1200.00,
+    },
 ];
 
 // Sub-komponen untuk setiap baris transaksi

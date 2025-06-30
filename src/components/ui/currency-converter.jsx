@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { FiMoreHorizontal, FiChevronDown } from 'react-icons/fi';
 
 // Define currency data with Tailwind classes for dynamic styling
@@ -13,26 +13,64 @@ const currencyData = {
 // Get currency options from the data object
 const currencyOptions = Object.keys(currencyData);
 
+// We create this reusable component to avoid duplicating code.
+const CurrencyDropdown = ({ selectedCurrency, setCurrency, isDropdownOpen, setIsDropdownOpen }) => {
+    const dropdownRef = useRef(null);
+    const currencyInfo = currencyData[selectedCurrency];
+
+    // This effect adds an event listener to close the dropdown when clicking outside of it.
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setIsDropdownOpen(false);
+            }
+        }
+        document.addEventListener("mousedown", handleClickOutside);
+        // Cleanup the event listener when the component is unmounted
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, [dropdownRef, setIsDropdownOpen]);
+
+    return (
+        <div className="relative w-full sm:w-auto" ref={dropdownRef}>
+            {/* This button shows the current currency and opens the dropdown */}
+            <button
+                type="button"
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                className={`flex items-center justify-between w-full font-bold p-3 text-base rounded-lg sm:rounded-l-none ${currencyInfo.bgColor} ${currencyInfo.textColor} ${currencyInfo.ringColor} focus:outline-none focus:ring-2`}
+            >
+                <span className="mr-2">{selectedCurrency}</span>
+                <FiChevronDown size={20} className={`transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''}`} />
+            </button>
+
+            {/* The list of currency options. It only renders if 'isDropdownOpen' is true. */}
+            {isDropdownOpen && (
+                <div className="absolute right-0 mt-2 w-full min-w-[120px] bg-white rounded-md shadow-lg z-10 border border-slate-200">
+                    <div className="p-1">
+                        {currencyOptions.map((option) => (
+                            <div
+                                key={option}
+                                onClick={() => {
+                                    setCurrency(option);
+                                    setIsDropdownOpen(false); // Close dropdown after selection
+                                }}
+                                className="block w-full text-left px-3 py-2 text-sm rounded-md text-slate-700 hover:bg-slate-100 cursor-pointer"
+                            >
+                                {option}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            )}
+        </div>
+    );
+};
+
 export default function CurrencyConverter() {
     const [fromAmount, setFromAmount] = useState('100');
     const [toAmount, setToAmount] = useState('0.0043'); // Read-only for now
     const [fromCurrency, setFromCurrency] = useState('USDT');
     const [toCurrency, setToCurrency] = useState('BTC');
-
-    const handleFromAmountChange = (e) => {
-        setFromAmount(e.target.value);
-        // In a real app, this would trigger a conversion to update toAmount
-    };
-
-    const handleFromCurrencyChange = (e) => {
-        setFromCurrency(e.target.value);
-        // In a real app, this would trigger a conversion
-    };
-
-    const handleToCurrencyChange = (e) => {
-        setToCurrency(e.target.value);
-        // In a real app, this would trigger a conversion
-    };
+    const [openDropdown, setOpenDropdown] = useState(null);
 
     return (
         <div className="bg-white rounded-xl shadow-sm p-4">
@@ -44,52 +82,38 @@ export default function CurrencyConverter() {
                 </button>
             </div>
 
-            {/* From Amount Input & Currency Dropdown */}
-            <div className="flex mb-3">
+            {/* "From" Input Section */}
+            <div className="flex flex-col sm:flex-row w-full bg-slate-100 rounded-xl p-1 mb-3">
                 <input
                     type="number"
-                    className="flex-1 bg-slate-100 border-none rounded-l-lg p-2 text-base focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                    className="w-full sm:flex-1 bg-transparent border-none p-3 text-lg text-slate-800 focus:outline-none placeholder:text-slate-400"
                     value={fromAmount}
-                    onChange={handleFromAmountChange}
+                    onChange={(e) => setFromAmount(e.target.value)}
+                    placeholder="0.0"
                 />
-                <div className="relative">
-                    <select
-                        className={`font-bold rounded-r-lg p-2 text-base appearance-none pr-8 focus:ring-2 focus:ring-blue-500 focus:outline-none ${currencyData[fromCurrency].bgColor} ${currencyData[fromCurrency].textColor}`}
-                        value={fromCurrency}
-                        onChange={handleFromCurrencyChange}
-                    >
-                        {currencyOptions.map((option) => (
-                            <option key={option} value={option} className="text-black">
-                                {option}
-                            </option>
-                        ))}
-                    </select>
-                    <FiChevronDown size={16} className={`absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none ${currencyData[fromCurrency].textColor}`} />
-                </div>
+                <CurrencyDropdown
+                    selectedCurrency={fromCurrency}
+                    setCurrency={setFromCurrency}
+                    isDropdownOpen={openDropdown === 'from'}
+                    setIsDropdownOpen={(isOpen) => setOpenDropdown(isOpen ? 'from' : null)}
+                />
             </div>
 
             {/* To Amount Input & Currency Dropdown */}
-            <div className="flex mb-4">
+            <div className="flex flex-col sm:flex-row w-full bg-slate-100 rounded-xl p-1 mb-6">
                 <input
                     type="number"
-                    className="flex-1 bg-slate-100 border-none rounded-l-lg p-2 text-base focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                    className="w-full sm:flex-1 bg-transparent border-none p-3 text-lg text-slate-800 focus:outline-none placeholder:text-slate-400"
                     value={toAmount}
-                    readOnly // This input is read-only
+                    onChange={(e) => setToAmount(e.target.value)}
+                    placeholder="0.0"
                 />
-                <div className="relative">
-                    <select
-                        className={`font-bold rounded-r-lg p-2 text-base appearance-none pr-8 focus:ring-2 focus:ring-blue-500 focus:outline-none ${currencyData[toCurrency].bgColor} ${currencyData[toCurrency].textColor}`}
-                        value={toCurrency}
-                        onChange={handleToCurrencyChange}
-                    >
-                        {currencyOptions.map((option) => (
-                            <option key={option} value={option} className="text-black">
-                                {option}
-                            </option>
-                        ))}
-                    </select>
-                    <FiChevronDown size={16} className={`absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none ${currencyData[toCurrency].textColor}`} />
-                </div>
+                <CurrencyDropdown
+                    selectedCurrency={toCurrency}
+                    setCurrency={setToCurrency}
+                    isDropdownOpen={openDropdown === 'to'}
+                    setIsDropdownOpen={(isOpen) => setOpenDropdown(isOpen ? 'to' : null)}
+                />
             </div>
 
             {/* Convert Now Button */}

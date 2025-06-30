@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from 'react';
-import Image from 'next/image';
 
 // Mock Data with Categories
 const marketData = [
@@ -9,7 +8,7 @@ const marketData = [
         name: 'Bitcoin',
         price: 23495.50,
         change: 1.25,
-        category: 'Metaverse', // Example category
+        category: 'Defi', // Example category
     },
     {
         ticker: 'ETH',
@@ -30,27 +29,6 @@ const marketData = [
         name: 'Solana',
         price: 22.10,
         change: -2.10,
-        category: 'Metaverse',
-    },
-    {
-        ticker: 'DOT',
-        name: 'Polkadot',
-        price: 6.20,
-        change: 0.75,
-        category: 'Defi',
-    },
-    {
-        ticker: 'MANA',
-        name: 'Decentraland',
-        price: 0.68,
-        change: 3.10,
-        category: 'Metaverse',
-    },
-    {
-        ticker: 'UNI',
-        name: 'Uniswap',
-        price: 6.50,
-        change: 1.50,
         category: 'Defi',
     },
 ];
@@ -66,7 +44,7 @@ const CryptoRow = ({ ticker, name, price, change }) => {
     }).format(price);
 
     return (
-        <div className="flex items-center justify-between py-3 px-4">
+        <div className="flex items-center justify-between py-3 px-4 border border-r-0 border-l-0 border-gray-100">
             {/* Left: Ticker and Name */}
             <div className="flex flex-col">
                 <span className="text-black font-bold text-base">{ticker}</span>
@@ -93,7 +71,7 @@ const CryptoRow = ({ ticker, name, price, change }) => {
 export default function MarketList() {
     const [activeFilter, setActiveFilter] = useState('All');
 
-    const filterButtons = ['All', 'Metaverse', 'Defi'];
+    const filterButtons = ['All', 'Defi'];
 
     const filteredData = marketData.filter((coin) => {
         if (activeFilter === 'All') {
@@ -106,8 +84,7 @@ export default function MarketList() {
     });
 
     return (
-        <div className="bg-white rounded-xl shadow-sm p-6">
-
+        <div className="bg-white rounded-xl shadow-sm p-6 mt-6">
             {/* Filter Buttons */}
             <div className="flex space-x-2 mb-6 items-center justify-between">
                 <h2 className="text-lg font-bold ml-3">Markets</h2>
