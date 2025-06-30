@@ -84,7 +84,7 @@ export default function MarketList() {
     });
 
     return (
-        <div className="bg-white rounded-xl shadow-sm p-6 mt-6">
+        <div className="bg-white rounded-xl shadow-sm p-6 mt-6 lg:mt-0">
             {/* Filter Buttons */}
             <div className="flex space-x-2 mb-6 items-center justify-between">
                 <h2 className="text-lg font-bold ml-3">Markets</h2>

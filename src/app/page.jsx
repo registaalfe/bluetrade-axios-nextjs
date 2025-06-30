@@ -53,7 +53,7 @@ export default async function Home() {
                             <div className="elementor-element flex justify-between items-center">
                                 <div className="flex items-center space-x-3 text-[#5a6477] font-semibold text-base">
                                     <Image src="/img/icon-wallet.png" alt="Logo" width={40} height={20} />
-                                    <span className="text-base text-black font-semibold font-poppins">
+                                    <span className="text-base text-black font-semibold font-poppins lg:w-1/4">
                                         Estimated Balance
                                     </span>
                                 </div>
@@ -65,7 +65,7 @@ export default async function Home() {
                                 $123,987
                             </p>
                             <div className="flex justify-between items-center text-[#5a6477] text-sm font-normal">
-                                <span className="text-third text-sm font-poppins">
+                                <span className="text-third text-sm font-poppins lg:w-1/4 lg:text-xs">
                                     Monthly Profit
                                 </span>
                                 <div className="flex items-center space-x-3">
@@ -84,54 +84,64 @@ export default async function Home() {
 
                         {/* start: Cryptocurrency Grid */}
                         <div className="elementor-container grid grid-cols-2 gap-4 mb-6">
-                            <div className="elementor-column bg-white rounded-2xl p-4 flex flex-col">
+                            <div className="elementor-column bg-white rounded-2xl p-6 flex flex-col">
                                 <div className="elementor-element flex items-center space-x-3 mb-2 text-[#5a6477] font-semibold text-sm">
-                                    <Image src="/img/icon-btc.png" alt="Logo" width={28} height={20} />
+                                    <Image src="/img/icon-btc.png" alt="Logo" width={40} height={20} />
                                     <div className="space-y-1">
-                                        <p className="text-black font-poppins font-semibold text-sm leading-none">
+                                        <p className="text-black font-poppins font-semibold text-sm leading-none lg:text-base">
                                             BTCUSDT
                                         </p>
-                                        <p className="text-black font-poppins text-[10px] font-normal leading-none">
+                                        <p className="text-black font-poppins text-[10px] font-normal leading-none lg:text-sm">
                                             Bitcoin
                                         </p>
                                     </div>
                                 </div>
-                                <LineChart />
-                                <p className="text-black font-poppins font-semibold text-xs mb-1">
-                                    $23,738
-                                </p>
-                                <div className="flex justify-between items-center text-black font-poppins text-[10px] font-normal">
+                                <div className="items-center max-lg:flex max-lg:flex-col-reverse max-lg:items-start lg:grid lg:grid-cols-2">
+                                    <p className="text-black font-poppins font-semibold text-xs mb-1 lg:text-xl">
+                                        $23,738
+                                    </p>
+                                    <LineChart />
+                                </div>
+                                <div className="flex justify-between items-center text-third font-poppins text-[10px] font-normal lg:text-xs">
                                     <span>
                                         PNL Daily
                                     </span>
-                                    <span className="bg-btnprofit text-profit rounded-full px-3 py-1 text-[10px">
+                                    <span className="font-semibold text-down text-xs font-poppins max-sm:hidden">
+                                        -$1960.78
+                                    </span>
+                                    <span className="bg-btnprofit text-profit rounded-full px-3 py-1">
                                         +14.67%
                                     </span>
                                 </div>
                             </div>
 
-                            <div className="elementor-column bg-white rounded-2xl p-4 flex flex-col">
+                            <div className="elementor-column bg-white rounded-2xl p-6 flex flex-col">
                                 <div className="elementor-element flex items-center space-x-3 mb-2 text-[#5a6477] font-semibold text-sm">
-                                    <Image src="/img/icon-eth.png" alt="Logo" width={28} height={20} />
+                                    <Image src="/img/icon-eth.png" alt="Logo" width={40} height={20} />
                                     <div className="space-y-1">
-                                        <p className="text-black font-poppins font-semibold text-sm leading-none">
+                                        <p className="text-black font-poppins font-semibold text-sm leading-none lg:text-base">
                                             ETHUSDT
                                         </p>
-                                        <p className="text-black font-poppins text-[10px] font-normal leading-none">
+                                        <p className="text-black font-poppins text-[10px] font-normal leading-none lg:text-sm">
                                             Ethereum
                                         </p>
                                     </div>
                                 </div>
-                                <LineChart />
-                                <p className="text-black font-poppins font-semibold text-xs mb-1">
-                                    $23,738
-                                </p>
-                                <div className="flex justify-between items-center text-black font-poppins text-[10px] font-normal">
+                                <div className="items-center max-lg:flex max-lg:flex-col-reverse max-lg:items-start lg:grid lg:grid-cols-2">
+                                    <p className="text-black font-poppins font-semibold text-xs mb-1 lg:text-xl">
+                                        $23,738
+                                    </p>
+                                    <LineChart />
+                                </div>
+                                <div className="flex justify-between items-center text-third font-poppins text-[10px] font-normal lg:text-xs">
                                     <span>
                                         PNL Daily
                                     </span>
-                                    <span className="bg-btnprofit text-profit rounded-full px-3 py-1 text-[10px">
-                                        +24.68%
+                                    <span className="font-semibold text-profit text-xs font-poppins max-sm:hidden">
+                                        +$2560.78
+                                    </span>
+                                    <span className="bg-btnprofit text-profit rounded-full px-3 py-1">
+                                        +14.67%
                                     </span>
                                 </div>
                             </div>

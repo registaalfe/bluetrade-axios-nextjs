@@ -1,62 +1,76 @@
 "use client";
-import { useEffect, useRef } from "react";
-import Chart from "chart.js";
+import { Line } from 'react-chartjs-2';
+import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend,
+} from 'chart.js';
 
-/**
- * 
- * LineChart Component
- * 
- * @param {Array} data - The dataset to plot (e.g. [65, 67, 66, 69])
- * @param {string} chartId - Unique ID for each chart (e.g. "chart-BTC")
- */
-export default function LineChart({ data, chartId }) {
-    // useRef gives us a reference to the <canvas> element
-    const chartRef = useRef(null);
+// Registering Chart.js components is still necessary
+ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend
+);
 
-    useEffect(() => {
-        // Get canvas context safely using useRef
-        const ctx = chartRef.current.getContext("2d");
 
-        // Create the chart
-        const chart = new Chart(ctx, {
-            type: "line",
-            data: {
-                labels: ["Jan", "Feb", "Mar", "Apr"],
-                datasets: [
-                    {
-                        label: "Performance",
-                        backgroundColor: "#3182ce",
-                        borderColor: "#3182ce",
-                        data: data,
-                        fill: false,
-                        pointRadius: 0,
-                        pointHoverRadius: 0,
-                    },
-                ],
+export default function LineChart() {
+    // Chart.js data configuration remains the same
+    const chartData = {
+        labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
+        datasets: [
+            {
+                label: 'Price',
+                data: [45, 48, 42, 55, 50, 60, 58, 62, 60, 65],
+                borderColor: '#f6ad55', // An orange color similar to the image
+                backgroundColor: 'transparent',
+                borderWidth: 3, // Made the line slightly thicker
+                tension: 0.4, // This makes the line curvy
+                pointRadius: 0, // Hides the points on the line
             },
-            options: {
-                maintainAspectRatio: false,
-                responsive: true,
-                layout: { padding: 0 },
-                legend: { display: false },
-                title: { display: false },
-                scales: {
-                    xAxes: [{ display: false, gridLines: { display: false } }],
-                    yAxes: [{ display: false, gridLines: { display: false } }],
-                },
-            },
-        });
+        ],
+    };
 
-        // Clean up chart when component unmounts
-        return () => chart.destroy();
-    }, [data]);
+    // Chart.js options configuration remains the same
+    const chartOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                display: false, // Hides the legend
+            },
+            tooltip: {
+                enabled: false, // Disables tooltips
+            },
+        },
+        scales: {
+            x: {
+                display: false, // Hides the x-axis
+            },
+            y: {
+                display: false, // Hides the y-axis
+            },
+        },
+        elements: {
+            line: {
+                borderCapStyle: 'round',
+            },
+        },
+    };
 
     return (
-        <div className="flex-auto p-3">
-            <div className="relative h-16">
-                {/* Attach useRef to canvas */}
-                <canvas ref={chartRef} id={chartId}></canvas>
-            </div>
+        // The container is now simpler, just holding the chart
+        <div className="bg-white p-2 w-full max-w-sm h-28">
+            <Line options={chartOptions} data={chartData} />
         </div>
     );
 }
