@@ -23,14 +23,15 @@ ChartJS.register(
 );
 
 
-export default function LineChart() {
+export default function LineChart({ data = [] }) {
+    const labels = data.map((_, i) => i + 1);
     // Chart.js data configuration remains the same
     const chartData = {
-        labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
+        labels,
         datasets: [
             {
                 label: 'Price',
-                data: [45, 48, 42, 55, 50, 60, 58, 62, 60, 65],
+                data,
                 borderColor: '#f6ad55', // An orange color similar to the image
                 backgroundColor: 'transparent',
                 borderWidth: 3, // Made the line slightly thicker
