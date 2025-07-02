@@ -1,39 +1,8 @@
 "use client";
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { getCoins } from '@/app/api/wallet'; // sesuaikan path kamu
 
-// Mock Data with Categories
-const marketData = [
-    {
-        ticker: 'BTC',
-        name: 'Bitcoin',
-        price: 23495.50,
-        change: 1.25,
-        category: 'Defi', // Example category
-    },
-    {
-        ticker: 'ETH',
-        name: 'Ethereum',
-        price: 1650.75,
-        change: -0.80,
-        category: 'Defi',
-    },
-    {
-        ticker: 'ADA',
-        name: 'Cardano',
-        price: 0.35,
-        change: 0.05,
-        category: 'Defi',
-    },
-    {
-        ticker: 'SOL',
-        name: 'Solana',
-        price: 22.10,
-        change: -2.10,
-        category: 'Defi',
-    },
-];
-
-// CryptoRow Sub-component
+// CryptoRow Sub-component (sama seperti sebelumnya)
 const CryptoRow = ({ ticker, name, price, change }) => {
     const isPositive = change >= 0;
     const formattedPrice = new Intl.NumberFormat('en-US', {
@@ -45,18 +14,13 @@ const CryptoRow = ({ ticker, name, price, change }) => {
 
     return (
         <div className="flex items-center justify-between py-3 px-4 border border-r-0 border-l-0 border-gray-100">
-            {/* Left: Ticker and Name */}
             <div className="flex flex-col">
                 <span className="text-black font-bold text-base">{ticker}</span>
                 <span className="text-third text-sm">{name}</span>
             </div>
-
-            {/* Middle: Price */}
             <div className="text-black text-base">
                 {formattedPrice}
             </div>
-
-            {/* Right: Change Badge */}
             <div
                 className={`rounded-full px-3 py-1 text-xs font-semibold ${isPositive ? 'bg-btnprofit text-profit' : 'bg-downgbg text-down'
                     }`}
@@ -69,17 +33,31 @@ const CryptoRow = ({ ticker, name, price, change }) => {
 
 // MarketList Component
 export default function MarketList() {
+    const [coins, setCoins] = useState([]);
+    const [loading, setLoading] = useState(true);
     const [activeFilter, setActiveFilter] = useState('All');
 
+    // Just 1 dummy category for now
     const filterButtons = ['All', 'Defi'];
 
-    const filteredData = marketData.filter((coin) => {
-        if (activeFilter === 'All') {
-            return true;
-        }
-        // Assuming a coin can belong to multiple categories, or just one.
-        // For simplicity, checking if the coin's category matches the active filter.
-        // If a coin can have multiple categories, this logic would need to be expanded.
+    useEffect(() => {
+        const fetchCoins = async () => {
+            try {
+                const data = await getCoins('usd', 1, 4); // ambil 5 coin aja
+                setCoins(data);
+            } catch (err) {
+                console.error('Failed to fetch coins:', err);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchCoins();
+    }, []);
+
+    const filteredCoins = coins.filter((coin) => {
+        if (activeFilter === 'All') return true;
+        // Nanti kalau punya kategori, tinggal cocokin di sini
         return coin.category === activeFilter;
     });
 
@@ -104,17 +82,21 @@ export default function MarketList() {
                 </div>
             </div>
 
-            {/* Cryptocurrency Markets List */}
+            {/* Coin List */}
             <div className="items-center">
-                {filteredData.map((coin) => (
-                    <CryptoRow
-                        key={coin.ticker}
-                        ticker={coin.ticker}
-                        name={coin.name}
-                        price={coin.price}
-                        change={coin.change}
-                    />
-                ))}
+                {loading ? (
+                    <p className="text-center text-sm text-gray-500">Loading...</p>
+                ) : (
+                    filteredCoins.map((coin) => (
+                        <CryptoRow
+                            key={coin.id}
+                            ticker={coin.symbol.toUpperCase()}
+                            name={coin.name}
+                            price={coin.current_price}
+                            change={coin.price_change_percentage_24h}
+                        />
+                    ))
+                )}
             </div>
         </div>
     );

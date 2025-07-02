@@ -35,3 +35,10 @@ Ready to get started? **Clone this repo** and explore the power of **Blue Trade*
 ---
 
 We hope **Blue Trade** empowers your trading decisions, provides deeper insights, and offers the clarity you need in an unpredictable world. Let’s shape the future of trading together.
+
+
+```sh
+
+git-auto-commit
+
+```

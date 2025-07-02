@@ -1,12 +1,10 @@
-import Image from 'next/image';
 import BarChart from '@/components/ui/bar-chart';
 import MarketList from '@/components/ui/market-list';
 import CurrencyConverter from '@/components/ui/currency-converter';
 import TransactionHistory from '@/components/ui/transaction-history';
-import { Poppins } from 'next/font/google';
-import { IoEyeOutline } from "react-icons/io5";
-import { TiArrowSortedDown } from "react-icons/ti";
 import CoinsCard from '@/components/ui/coins-card';
+import { Poppins } from 'next/font/google';
+import { TiArrowSortedDown } from "react-icons/ti";
 
 // Set up Poppins with specified weights
 const poppinsFont = Poppins({

@@ -27,7 +27,7 @@ export default function CoinsCard() {
     return (
         <>
             {/* start: Cryptocurrency Grid */}
-            <div className="elementor-container grid grid-cols-3 gap-4 mb-6">
+            <div className="elementor-container grid grid-cols-3 gap-4 mb-6 max-lg:grid-cols-1">
                 {coins.map((coin, index) => (
                     <div key={coin.id} className="elementor-column bg-white rounded-2xl p-6 flex flex-col">
                         <div className="elementor-element flex items-center space-x-3 mb-2 text-[#5a6477] font-semibold text-sm">
@@ -51,7 +51,7 @@ export default function CoinsCard() {
 
                         <div className="flex justify-between items-center text-third font-poppins text-[10px] font-normal lg:text-xs">
                             <span>PNL Daily</span>
-                            <span className="font-semibold text-profit text-xs font-poppins max-sm:hidden">
+                            <span className="font-semibold text-profit text-xs font-poppins">
                                 +${(coin.price_change_24h || 0).toFixed(2)}
                             </span>
                             <span className={`rounded-full px-3 py-1 ${coin.price_change_percentage_24h >= 0 ? 'bg-btnprofit text-profit' : 'bg-red-100 text-red-500'
@@ -63,7 +63,6 @@ export default function CoinsCard() {
                 ))}
             </div>
             {/* end: Cryptocurrency Grid */}
-
         </>
     );
 }
