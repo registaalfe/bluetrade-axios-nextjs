@@ -1,5 +1,7 @@
 # Blue Trade - Crypto Chart Tracker
 
+Check this out >>> [bluetrade.vercel.app](https://bluetrade-axios-nextjs.vercel.app/)
+
 Welcome to **Blue Trade**, your ultimate tool for real-time cryptocurrency tracking and insights. Whether you're an investor, trader, or just someone passionate about the dynamic world of digital assets, **Blue Trade** is your reliable partner in making informed decisions in an ever-evolving market.
 
 ### Overview
@@ -36,9 +38,3 @@ Ready to get started? **Clone this repo** and explore the power of **Blue Trade*
 
 We hope **Blue Trade** empowers your trading decisions, provides deeper insights, and offers the clarity you need in an unpredictable world. Let’s shape the future of trading together.
 
-
-```sh
-
-git-auto-commit
-
-```
